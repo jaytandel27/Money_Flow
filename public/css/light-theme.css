@@ -1,0 +1,142 @@
+/* ===============================
+   Base Styles
+================================= */
+body {
+    background-color: #f9f9f9;
+    color: #1f2937; /* Gray-800 */
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+}
+
+/* ===============================
+   Sidebar (Aside)
+================================= */
+aside {
+    background-color: #ffffff; /* Red-50 */
+    color: #8cf591; /* Red-900 */
+}
+
+/* ===============================
+   Navigation Bar
+================================= */
+nav button,
+nav div {
+    background-color: #ffffff; /* Red-300 */
+    color: #ffffff; /* Red-900 */
+    border-radius: 0.375rem;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav button:hover,
+nav div button:hover {
+    background-color: #030303;
+    color: #ffffff; /* Red-700 */
+}
+    
+/* ===============================
+   Main Content Area
+================================= */
+main {
+    background-color: #ffffff;
+    color: rgb(243, 247, 253); /* Gray-800 */
+    padding: 1rem;
+}
+
+/* ===============================
+   Utility Overrides    important css
+================================= */
+.bg-gray-800 {
+    background-color: #ffffff !important; /* Gray-100 */  
+    color: #0d0e0e !important;           /* Gray-800 */
+}
+
+.bg-black {
+    background-color: #ffffff!important;
+    color: #ffffff !important;
+}
+
+/* ===============================
+   Form Inputs
+================================= */
+input,
+select,
+textarea {
+    background-color: rgb(255, 255, 255) !important;
+    color: #99b1d3 !important;
+    border: 1px solid #d1d5db; /* Gray-300 */
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #ffffff; /* Blue-500 */
+    box-shadow: 0 0 0 2px rgb(255, 255, 255);
+}
+
+/* ===============================
+   Buttons
+================================= */
+button {
+    background-color: #f7f2f2; /* Red-300 */
+    color: #f3f7f3;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:hover {
+    background-color: #070707;
+    color: #faf5f5; /* Red-700 */
+}
+
+/* ===============================
+   Tables
+================================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+}
+
+th {
+    background-color: #f3f4f6; /* Gray-100 */
+    color: #111827;            /* Gray-900 */
+    text-align: left;
+    padding: 0.75rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+td {
+    background-color: #e7f0f1;
+    color: #374151; /* Gray-700 */
+    padding: 0.75rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* ===============================
+   Utilities & Responsiveness
+================================= */
+@media (max-width: 768px) {
+    aside {
+        display: none;
+    }
+
+    nav button {
+        padding: 0.4rem 0.8rem;
+    }
+
+    table {
+        font-size: 0.875rem;
+    }
+}
