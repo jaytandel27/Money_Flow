@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\RegisterController;
-//use App\Http\Controllers\API\Auth\RegisterController;
+//use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\API\Auth\RegisterController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\IncomeController;
@@ -28,7 +28,7 @@ Route::middleware('guest')->group(function () {
     })->name('auth.custom');
 
     Route::post('/login', [LoginController::class, 'login'])->name('login');
-    Route::post('/register', [RegisterController::class, 'register'])->name('register');
+    // Route::post('/register', [RegisterController::class, 'register'])->name('register');
 });
 
 // Logout Route
