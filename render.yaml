@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: money-flow
+    env: docker
+    dockerfilePath: docker/Dockerfile
+    plan: free
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        generateValue: true
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        fromService:
+          name: money-flow-db
+          type: database
+          property: host
+      - key: DB_PORT
+        value: 3306
+      - key: DB_DATABASE
+        fromService:
+          name: money-flow-db
+          type: database
+          property: database
+      - key: DB_USERNAME
+        fromService:
+          name: money-flow-db
+          type: database
+          property: user
+      - key: DB_PASSWORD
+        fromService:
+          name: money-flow-db
+          type: database
+          property: password
+
+databases:
+  - name: money-flow-db
+    plan: free
