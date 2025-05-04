@@ -88,14 +88,15 @@
 </div>
 
 <div class="sidebar-profile text-center bg-gray-300 p-4 rounded-lg shadow-md">
-    @if(auth()->user()->profile_picture)
-        <img src="{{ asset('storage/' . auth()->user()->profile_picture) }}" 
-             alt="User Profile" 
-             class="profile-img w-12 h-12 rounded-full border border-gray-400 shadow-md">
-    @else
-        <div class="w-12 h-12 bg-white text-gray-700 font-bold text-xl flex items-center justify-center rounded-full shadow-lg">
-            {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-        </div>
-    @endif
+@if(Auth::user()->profile_picture)
+    <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}?v={{ time() }}"
+         alt="User Profile"
+         class="w-20 h-20 rounded-full border-4 border-gray-400 shadow-md mb-4">
+@else
+    <div class="w-20 h-20 bg-white text-gray-700 font-bold text-3xl flex items-center justify-center rounded-full shadow-lg mb-4">
+        {{ strtoupper(Auth::user()->name[0]) }}
+    </div>
+@endif
+
     <p class="username">{{ auth()->user()->name }}</p>
 </div>

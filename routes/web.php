@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-//use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\API\Auth\RegisterController;
+use App\Http\Controllers\Auth\RegisterController;
+//use App\Http\Controllers\API\Auth\RegisterController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\IncomeController;
@@ -28,7 +28,7 @@ Route::middleware('guest')->group(function () {
     })->name('auth.custom');
 
     Route::post('/login', [LoginController::class, 'login'])->name('login');
-    // Route::post('/register', [RegisterController::class, 'register'])->name('register');
+    Route::post('/register', [RegisterController::class, 'register'])->name('register');
 });
 
 // Logout Route
@@ -61,7 +61,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/password/update', [PasswordController::class, 'update'])->name('password.update');
 
     // Profile
-    Route::match(['POST', 'PUT'], '/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    // Keep only this
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+  //  Route::match(['POST', 'PUT'], '/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::get('/test-mail', function () {
         $user = \App\Models\User::first();

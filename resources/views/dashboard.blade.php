@@ -350,8 +350,7 @@
                         <p>No recent transactions.</p>
                     @endif
                 </div>
-
-   <!-- User Profile Section -->
+<!-- User Profile Section -->
 <div id="user-profile-section" class="hidden bg-gray-800 text-white p-6 rounded-lg shadow-lg">
     <h2 class="text-lg font-semibold mb-4">Profile Information</h2>
 
@@ -369,7 +368,7 @@
     <!-- Profile Update Form -->
     <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('PUt')
+        @method('PUT')
 
         <label class="block">Profile Picture:</label>
         <input type="file" name="profile_picture" id="profile_picture" accept="image/*" class="w-full p-2 mb-2 border rounded bg-gray-700 text-white" onchange="previewImage(event)">
