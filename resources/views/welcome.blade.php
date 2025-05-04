@@ -118,9 +118,8 @@
                     <a href="{{ url('/dashboard') }}" class="btn btn-register">Go to Dashboard</a>
                 @else
                     <a href="{{ route('login') }}" class="btn btn-login">Log in</a>
-                    @if (Route::has('register.show'))
-                        <a href="{{ route('register.show') }}" class="btn btn-register">Register</a>
-                    @endif
+                    <a href="{{ route('auth.custom') }}" class="btn btn-register">Register</a>
+
                 @endauth
             </div>
         @endif
