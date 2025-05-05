@@ -111,19 +111,20 @@
     <main>
         <h1>Welcome to Money Flow</h1>
         <p>Track your expenses easily and stay financially organized with our simple and intuitive platform.</p>
-
         @if (Route::has('login'))
-            <div class="auth-buttons">
-                @auth
-                    <a href="{{ url('/dashboard') }}" class="btn btn-register">Go to Dashboard</a>
-                @else
-                    <a href="{{ route('login') }}" class="btn btn-login">Log in</a>
-                    @if (Route::has('register.show'))
-                        <a href="{{ route('register.show') }}" class="btn btn-register">Register</a>
-                    @endif
-                @endauth
-            </div>
-        @endif
+    <div class="top-right links">
+        @auth
+            <a href="{{ url('/dashboard') }}" class="btn btn-register">Go to Dashboard</a>
+        @else
+            <a href="{{ route('login') }}" class="btn btn-login">Log in</a>
+
+            @if (Route::has('auth.custom'))
+                <a href="{{ route('auth.custom') }}" class="btn btn-register">Register</a>
+            @endif
+        @endauth
+    </div>
+@endif
+
     </main>
 </body>
 </html>
