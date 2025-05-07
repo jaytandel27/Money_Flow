@@ -27,6 +27,9 @@ Route::middleware('guest')->group(function () {
         return view('auth.auth');
     })->name('auth.custom');
 
+    Route::get('/login', [LoginController::class, 'show'])->name('login');
+
+
     Route::post('/login', [LoginController::class, 'login'])->name('login');
     Route::post('/register', [RegisterController::class, 'register'])->name('register');
 });
