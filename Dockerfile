@@ -1,4 +1,3 @@
-# Use the official PHP 8.2 image with Apache
 FROM php:8.2-apache
 
 # Install system dependencies
@@ -17,10 +16,13 @@ RUN apt-get update && apt-get install -y \
 RUN a2enmod rewrite
 
 # Set working directory
-WORKDIR /var/www/html
+WORKDIR /var/www
 
-# Copy app source
+# Copy source code
 COPY . .
+
+# Point Apache to Laravel's public directory
+RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/public|' /etc/apache2/sites-available/000-default.conf
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -29,13 +31,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN composer install --no-dev --optimize-autoloader
 
 # Set correct permissions
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
-# Run Laravel optimization commands
+# Optionally run Laravel commands (ensure no route name duplicates)
 RUN php artisan config:cache && \
-    php artisan route:cache && \
     php artisan view:cache && \
     php artisan storage:link
 
-# Expose Apache port
 EXPOSE 80
