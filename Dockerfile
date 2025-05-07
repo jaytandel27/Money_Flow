@@ -1,42 +1,36 @@
-# Use official PHP 8.2 FPM image
-FROM php:8.2-fpm
+# Use official PHP image with Apache
+FROM php:8.2-apache
 
-# Install system dependencies and PHP extensions
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
-    build-essential \
+    git \
+    unzip \
+    zip \
+    curl \
     libpng-dev \
-    libjpeg-dev \
     libonig-dev \
     libxml2-dev \
     libzip-dev \
-    libssl-dev \
-    zip unzip curl git nginx supervisor \
-    && docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath
+    && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd zip
+
+# Enable Apache mod_rewrite
+RUN a2enmod rewrite
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Copy existing application
+COPY . /var/www/html
+
+# Set proper permissions
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Set working directory
-WORKDIR /var/www
+# Install PHP dependencies
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-# Copy Laravel application files
-COPY . .
-
-# Set file permissions for Laravel
-RUN chown -R www-data:www-data /var/www \
-    && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
-
-# Install Laravel PHP dependencies
-RUN composer install --no-dev --optimize-autoloader
-
-# Copy Nginx configuration
-COPY docker/nginx.conf /etc/nginx/sites-available/default
-
-# Copy Supervisor configuration
-COPY docker/supervisord.conf /etc/supervisord.conf
-
-# Expose port 80 for HTTP traffic
+# Expose port 80
 EXPOSE 80
-
-# Run Supervisor to manage PHP-FPM and Nginx
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
